@@ -6,6 +6,7 @@ use Application\Service\AbstractAclService;
 use Activity\Model\Activity as ActivityModel;
 use Zend\ServiceManager\ServiceManagerAwareInterface;
 use Decision\Model\AssociationYear as AssociationYear;
+use User\Service\User as UserService;
 
 class ActivityQuery extends AbstractAclService implements ServiceManagerAwareInterface
 {
@@ -227,7 +228,7 @@ class ActivityQuery extends AbstractAclService implements ServiceManagerAwareInt
                     $translator->translate('You are not allowed to view upcoming activities coupled to a member account')
                 );
             }
-            $user = $this->getServiceLocator()->get('user_service_user')->getIdentity();
+            $user = UserService->getIdentity();
             return $activityMapper->getUpcomingActivitiesForMember($user);
         }
         return $activityMapper->getUpcomingActivities(null, null, $category);
