@@ -7267,17 +7267,8 @@ Styleguide: colors
   width: 0.5%; }
 
 .grid-sizer, .photo-grid-item {
-  width: 49%;
+  width: 24.5%;
   margin-bottom: 0.5%; }
-  @media (min-width: 768px) {
-    .grid-sizer, .photo-grid-item {
-      width: 33%; } }
-  @media (min-width: 992px) {
-    .grid-sizer, .photo-grid-item {
-      width: 24.5%; } }
-  @media (min-width: 1200px) {
-    .grid-sizer, .photo-grid-item {
-      width: 16.2%; } }
 
 .photo-grid-item-photo {
   background-color: #d40026; }
