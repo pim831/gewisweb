@@ -159,10 +159,10 @@ class ActivityCalendar extends AbstractAclService
         return false;
     }
 
-    public function deleteOption($data)
+    public function deleteOption($id)
     {
         $mapper = $this->getActivityCalendarOptionMapper();
-        $option = $mapper->find($data['option_id']);
+        $option = $mapper->find($id);
         if (!$this->canDeleteOption($option)) {
             throw new \User\Permissions\NotAllowedException(
                 $this->getTranslator()->translate('You are not allowed to delete this option')
@@ -170,8 +170,35 @@ class ActivityCalendar extends AbstractAclService
         }
 
         $em = $this->getEntityManager();
-        $option->setDeletedBy($this->sm->get('user_service_user')->getIdentity());
+        $option->setModifiedBy($this->sm->get('user_service_user')->getIdentity());
+        $option->setStatus('deleted');
         $em->flush();
+    }
+
+    public function approveOption($id)
+    {
+        $mapper = $this->getActivityCalendarOptionMapper();
+        $option = $mapper->find($id);
+        if (!$this->canDeleteOption($option)) {
+            throw new \User\Permissions\NotAllowedException(
+                $this->getTranslator()->translate('You are not allowed to approve this option')
+            );
+        }
+
+        $em = $this->getEntityManager();
+        $option->setModifiedBy($this->sm->get('user_service_user')->getIdentity());
+        $option->setStatus('approved');
+        $em->flush();
+
+        $proposal = $option->getProposal();
+        $options = $mapper->findOptionsByProposal($proposal);
+
+        foreach ($options as $option) {
+            // Can't add two options at the same time
+            if ($option->getStatus() == null) {
+                $this->deleteOption($option->getId());
+            }
+        }
     }
 
     protected function canDeleteOption($option)
@@ -195,6 +222,108 @@ class ActivityCalendar extends AbstractAclService
         }
 
         return false;
+    }
+
+    /**
+     * Returns whether a member may create a new activity proposal
+     *
+     * @param int $organ_id
+     * @return bool
+     * @throws \Exception
+     */
+    protected function canCreateProposal($organ_id)
+    {
+        if (!$this->isAllowed('create')) {
+            return false;
+        }
+
+        $period = $this->getCurrentPeriod();
+        if ($period == null) {
+            return false;
+        }
+
+        if ($organ_id == null) {
+            return false;
+        }
+
+        $max = $this->getMaxActivities($organ_id, $period->getId());
+        $count = $this->getCurrentProposalCount($period, $organ_id);
+
+        if ($count > $max) {
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * Get the current ActivityOptionCreationPeriod
+     *
+     * @return \Activity\Model\ActivityOptionCreationPeriod
+     * @throws \Exception
+     */
+    protected function getCurrentPeriod() {
+        $mapper = $this->getActivityOptionCreationPeriodMapper();
+        return $mapper->getCurrentActivityOptionCreationPeriod();
+    }
+
+    /**
+     * Get the current proposal count of an organ for the given period
+     *
+     * @param \Activity\Model\ActivityOptionCreationPeriod
+     * @return int
+     */
+    protected function getCurrentProposalCount($period, $organ_id) {
+        $mapper = $this->getActivityCalendarOptionMapper();
+        $begin = $period->getBeginPlanningTime();
+        $end = $period->getEndPlanningTime();
+        $options = $mapper->getOptionsWithinPeriodAndOrgan($begin, $end, $organ_id);
+        return len($options);
+    }
+
+    /**
+     * Get the current ActivityOptionCreationPeriod
+     *
+     * @param int $proposal_id
+     * @param int $organ_id
+     * @return int
+     */
+    protected function getCurrentProposalOptionCount($proposal_id, $organ_id) {
+        $mapper = $this->getActivityCalendarOptionMapper();
+        $options = $mapper->findOptionsByProposalAndOrgan($proposal_id, $organ_id);
+        return len($options);
+    }
+
+    /**
+     * Get the max number of activity options an organ can create
+     *
+     * @param \Decision\Service\Organ $organ
+     * @return int
+     * @throws \Exception
+     */
+    protected function getMaxActivities($organ) {
+        $mapper = $this->getActivityOptionCreationPeriodMapper();
+        return $mapper->getCurrentActivityOptionCreationPeriod();
+    }
+
+    /**
+     * Get the period mapper
+     *
+     * @return \Activity\Mapper\ActivityOptionCreationPeriod
+     */
+    public function getActivityOptionCreationPeriodMapper()
+    {
+        return $this->sm->get('activity_mapper_period');
+    }
+
+    /**
+     * Get the max activities mapper
+     *
+     * @return \Activity\Mapper\MaxActivities
+     */
+    public function getMaxActivitiesMapper()
+    {
+        return $this->sm->get('activity_mapper_max_activities');
     }
 
     /**
