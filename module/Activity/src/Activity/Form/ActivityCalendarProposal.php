@@ -26,7 +26,7 @@ class ActivityCalendarProposal extends Form implements InputFilterProviderInterf
         }
 
         $this->add([
-            'name' => 'organ_id',
+            'name' => 'organ',
             'type' => 'select',
             'options' => [
                 'empty_option' => [
@@ -70,7 +70,7 @@ class ActivityCalendarProposal extends Form implements InputFilterProviderInterf
     public function getInputFilterSpecification()
     {
         return [
-            'organ_id' => [
+            'organ' => [
                 'required' => true
             ],
             'name' => [

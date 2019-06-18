@@ -48,7 +48,7 @@ class ActivityCalendarController extends AbstractActionController
         $service = $this->getActivityCalendarService();
 
         return new ViewModel([
-            'form' => $service->getCreateOptionForm(),
+            'form' => $service->getCreateProposalForm(),
         ]);
     }
 
