@@ -2,51 +2,31 @@
 
 namespace Activity\Form;
 
-use Decision\Model\Organ;
-use Zend\Form\Form;
-use Zend\Mvc\I18n\Translator;
+use Zend\Form\Fieldset;
 use Zend\InputFilter\InputFilterProviderInterface;
+use Zend\Mvc\I18n\Translator;
 
-class ActivityCalendarOption extends Form implements InputFilterProviderInterface
+class ActivityCalendarOption extends Fieldset implements InputFilterProviderInterface
 {
     protected $translator;
 
     /**
-     * @param Organ[] $organs
+     * ActivityCalendarOption constructor.
+     *
      * @param Translator $translator
      */
-    public function __construct(array $organs, Translator $translator)
+    public function __construct(Translator $translator)
     {
         parent::__construct();
         $this->translator = $translator;
 
-        // all the organs that the user belongs to in organId => name pairs
-        $organOptions = [0 => $translator->translate('No organ')];
-
-        foreach ($organs as $organ) {
-            $organOptions[$organ->getId()] = $organ->getAbbr();
-        }
-
-        $this->add([
-            'name' => 'name',
-            'attributes' => [
-                'type' => 'text',
-            ],
-        ]);
-
-        $this->add([
-            'name' => 'organ',
-            'type' => 'select',
-            'options' => [
-                'value_options' => $organOptions
-            ]
-        ]);
+        $typeOptions = [];
 
         $this->add([
             'name' => 'beginTime',
             'type' => 'datetime',
             'options' => [
-                'format' => 'Y/m/d H:i'
+                'format' => 'Y/m/d'
             ],
         ]);
 
@@ -54,14 +34,20 @@ class ActivityCalendarOption extends Form implements InputFilterProviderInterfac
             'name' => 'endTime',
             'type' => 'datetime',
             'options' => [
-                'format' => 'Y/m/d H:i'
+                'format' => 'Y/m/d'
             ],
+        ]);
+
+        $this->add([
+            'name' => 'type',
+            'type' => 'select',
+            'options' => [
+                'empty_option' => $translator->translate('Please select a type'),
+                'value_options' => $typeOptions
+            ]
         ]);
     }
 
-    /**
-     * Input filter specification.
-     */
     public function getInputFilterSpecification()
     {
         return [
@@ -93,20 +79,9 @@ class ActivityCalendarOption extends Form implements InputFilterProviderInterfac
             'endTime' => [
                 'required' => true,
             ],
-            'organ' => [
+
+            'type' => [
                 'required' => true
-            ],
-            'name' => [
-                'required' => true,
-                'validators' => [
-                    [
-                        'name' => 'string_length',
-                        'options' => [
-                            'min' => 2,
-                            'max' => 128
-                        ]
-                    ]
-                ]
             ],
         ];
     }
@@ -121,11 +96,10 @@ class ActivityCalendarOption extends Form implements InputFilterProviderInterfac
     public function beforeEndTime($value, $context = [])
     {
         try {
-            $thisTime = new \DateTime($value);
             $endTime = isset($context['endTime']) ? new \DateTime($context['endTime']) : new \DateTime('now');
-            return $thisTime <= $endTime;
+
+            return (new \DateTime($value)) <= $endTime;
         } catch (\Exception $e) {
-            // An exception is an indication that one of the times was not valid
             return false;
         }
     }
@@ -140,11 +114,10 @@ class ActivityCalendarOption extends Form implements InputFilterProviderInterfac
     public function isFutureTime($value, $context = [])
     {
         try {
-            $time = new \DateTime($value);
-            $now = new \DateTime();
-            return $time > $now;
+            $today = new \DateTime();
+
+            return (new \DateTime($value)) > $today;
         } catch (\Exception $e) {
-            // An exception is an indication that one of the times was not valid
             return false;
         }
     }
