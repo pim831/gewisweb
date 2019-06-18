@@ -124,7 +124,6 @@ class ActivityCalendar extends AbstractAclService
         $proposal->setCreationTime(new \DateTime());
         $em = $this->getEntityManager();
         $proposal->setCreator($this->sm->get('user_service_user')->getIdentity());
-        $proposal->setOrgan($form-get);
         $em->persist($proposal);
         $em->flush();
 
