@@ -42,7 +42,7 @@ class MaxActivities
     {
         $qb = $this->em->createQueryBuilder();
         $qb->select('x')
-            ->from('AcitivityOption\Model\ActivityOptionCreationPeriod', 'x')
+            ->from('AcitivityOption\Model\MaxActivities', 'x')
             ->where('x.organ = :organ_')
             ->andWhere('x.period = :period')
             ->setParameter('organ', $organ_id)
