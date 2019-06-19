@@ -21,6 +21,12 @@ class ActivityCalendarOption extends Fieldset implements InputFilterProviderInte
         parent::__construct();
         $this->setHydrator(new ClassMethodsHydrator(false));
         $this->translator = $translator;
+        $this->setAttribute('method', 'post');
+
+        $this->add([
+            'name' => 'security',
+            'type' => 'Zend\Form\Element\Csrf'
+        ]);
 
         $typeOptions = [$translator->translate('Lunch Lecture'),
             $translator->translate('Morning'),
