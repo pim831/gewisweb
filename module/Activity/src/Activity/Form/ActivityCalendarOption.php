@@ -5,6 +5,7 @@ namespace Activity\Form;
 use Zend\Form\Fieldset;
 use Zend\InputFilter\InputFilterProviderInterface;
 use Zend\Mvc\I18n\Translator;
+use Zend\Stdlib\Hydrator\ClassMethods as ClassMethodsHydrator;
 
 class ActivityCalendarOption extends Fieldset implements InputFilterProviderInterface
 {
@@ -18,6 +19,7 @@ class ActivityCalendarOption extends Fieldset implements InputFilterProviderInte
     public function __construct(Translator $translator)
     {
         parent::__construct();
+        $this->setHydrator(new ClassMethodsHydrator(false));
         $this->translator = $translator;
 
         $typeOptions = [$translator->translate('Lunch Lecture'),
