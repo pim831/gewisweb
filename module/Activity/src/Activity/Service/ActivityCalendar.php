@@ -255,7 +255,7 @@ class ActivityCalendar extends AbstractAclService
      */
     protected function canOrganCreateProposal($organ_id)
     {
-        if (!$this->isAllowed('create_always')) {
+        if ($this->isAllowed('create_always')) {
             return true;
         }
 
@@ -336,13 +336,19 @@ class ActivityCalendar extends AbstractAclService
     /**
      * Get the max number of activity options an organ can create
      *
-     * @param \Decision\Service\Organ $organ
+     * @param int $organ_id
+     * @param int $period_id
      * @return int
      * @throws \Exception
      */
-    protected function getMaxActivities($organ) {
-        $mapper = $this->getActivityOptionCreationPeriodMapper();
-        return $mapper->getCurrentActivityOptionCreationPeriod();
+    protected function getMaxActivities($organ_id, $period_id) {
+        $mapper = $this->getMaxActivitiesMapper();
+        $maxActivities = $mapper->getMaxActivityOptionsByOrganPeriod($organ_id, $period_id);
+        $max = 0;
+        if ($maxActivities == null) {
+            $max = $maxActivities->getValue();
+        }
+        return $max;
     }
 
     /**
