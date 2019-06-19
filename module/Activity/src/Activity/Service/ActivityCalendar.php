@@ -104,17 +104,11 @@ class ActivityCalendar extends AbstractAclService
     {
         $form = $this->getCreateProposalForm();
         $proposal = new ProposalModel();
-        $form->bind($proposal);
         $form->setData($data);
 
-        echo 1;
-
         if (!$form->isValid()) {
-            echo 1.1;
             return false;
         }
-
-        echo 2;
 
         $organ = $form->getData()['organ'];
         if (!$this->canOrganCreateProposal($organ)) {
@@ -153,7 +147,6 @@ class ActivityCalendar extends AbstractAclService
     {
         $form = $this->getCreateOptionForm();
         $option = new OptionModel();
-        $form->bind($option);
         $form->setData($data);
 
         if (!$form->isValid()) {
