@@ -54,12 +54,12 @@ $form->prepare();
                 <h2><?= $this->translate('Plan an activity') ?></h2>
             </div>
         </div>
-        <?php var_dump($period); if ($period != null): ?>
+        <?php if ($period == true): ?>
 
             <div class="row spacing-top--lg">
                 <div class="col-md-12">
                     <div class="alert alert-info" role="alert">
-                        <?= sprintf($this->translate('You can create proposals and options between %s and %s.'), $period->getBeginOptionTime(), $period->getEndOptionTime()) ?>
+                        <?= sprintf($this->translate('You can create proposals and options between %s and %s.'), $begin, $end) ?>
                     </div>
                 </div>
             </div>
