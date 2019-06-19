@@ -93,6 +93,6 @@ class ActivityOptionProposal
      */
     public function getRepository()
     {
-        return $this->em->getRepository('AcitivityOption\Model\ActivityOptionProposal');
+        return $this->em->getRepository('Activity\Model\ActivityOptionProposal');
     }
 }

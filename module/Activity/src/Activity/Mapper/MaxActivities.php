@@ -42,7 +42,7 @@ class MaxActivities
     {
         $qb = $this->em->createQueryBuilder();
         $qb->select('x')
-            ->from('AcitivityOption\Model\MaxActivities', 'x')
+            ->from('Activity\Model\MaxActivities', 'x')
             ->where('x.organ = :organ_')
             ->andWhere('x.period = :period')
             ->setParameter('organ', $organ_id)
@@ -59,6 +59,6 @@ class MaxActivities
      */
     public function getRepository()
     {
-        return $this->em->getRepository('AcitivityOption\Model\MaxActivities');
+        return $this->em->getRepository('Activity\Model\MaxActivities');
     }
 }
