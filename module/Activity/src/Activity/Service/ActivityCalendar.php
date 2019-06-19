@@ -105,14 +105,14 @@ class ActivityCalendar extends AbstractAclService
         $form = $this->getCreateProposalForm();
         $form->setData($data);
 
-        if (!$form->isValid()) {
-            return false;
-        }
-
-//        $organ = $form->get('organ')->getValue();
-//        if (!$this->canOrganCreateProposal($organ)) {
+//        if (!$form->isValid()) {
 //            return false;
 //        }
+
+        $organ = $form->get('organ')->getValue();
+        if (!$this->canOrganCreateProposal($organ)) {
+            return false;
+        }
 
         $proposal = new ProposalModel();
         $proposal->setCreationTime(new \DateTime());
