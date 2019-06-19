@@ -103,8 +103,6 @@ class ActivityCalendar extends AbstractAclService
     public function createProposal($data)
     {
         $form = $this->getCreateProposalForm();
-        $proposal = new ProposalModel();
-        $form->bind($proposal);
         $form->setData($data);
 
 //        if (!$form->isValid()) {
@@ -116,9 +114,14 @@ class ActivityCalendar extends AbstractAclService
             return false;
         }
 
+        $proposal = new ProposalModel();
         $proposal->setCreationTime(new \DateTime());
         $em = $this->getEntityManager();
         $proposal->setCreator($this->sm->get('user_service_user')->getIdentity());
+        $name = $form->get('name')->getValue();
+        $proposal->setName($name);
+        $description = $form->get('description')->getValue();
+        $proposal->setDescription($description);
         $proposal->setOrgan($this->sm->get('decision_service_organ')->getOrgan($organ));
         $em->persist($proposal);
         $em->flush();
@@ -144,7 +147,6 @@ class ActivityCalendar extends AbstractAclService
     {
         $form = $this->getCreateOptionForm();
         $option = new OptionModel();
-        $form->bind($option);
         $form->setData($data);
 
 //        if (!$form->isValid()) {
@@ -153,6 +155,12 @@ class ActivityCalendar extends AbstractAclService
 
         $em = $this->getEntityManager();
         $option->setProposal($proposal_id);
+        $beginTime = $form->get('beginTime')->getValue();
+        $option->setBeginTime($beginTime);
+        $endTime = $form->get('endTime')->getValue();
+        $option->setEndTime($endTime);
+        $type = $form->get('type')->getValue();
+        $option->setType($type);
         $em->persist($option);
         $em->flush();
 
