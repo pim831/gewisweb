@@ -166,16 +166,6 @@ class ActivityCalendarOption extends Fieldset implements InputFilterProviderInte
         }
     }
 
-    /**
-     * Get the activity calendar service
-     *
-     * @return \Activity\Service\ActivityCalendar
-     */
-    private function getActivityCalendarService()
-    {
-        return $this->getServiceLocator()->get('activity_service_calendar');
-    }
-
     private function toDateTime($value, $format = 'd/m/Y')
     {
         return \DateTime::createFromFormat($format, $value);
