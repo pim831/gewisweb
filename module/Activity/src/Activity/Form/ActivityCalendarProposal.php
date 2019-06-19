@@ -56,7 +56,7 @@ class ActivityCalendarProposal extends Form implements InputFilterProviderInterf
             'name' => 'options',
             'type' => 'Zend\Form\Element\Collection',
             'options' => [
-                'count' => 1,
+                'count' => 0,
                 'should_create_template' => true,
                 'allow_add' => true,
                 'target_element' => new ActivityCalendarOption($translator)
@@ -87,6 +87,18 @@ class ActivityCalendarProposal extends Form implements InputFilterProviderInterf
             ],
             'description' => [
                 'required' => false
+            ],
+            'options' => [
+                'required' => true,
+                'validators' => [
+                    [
+                        'name' => 'string_length',
+                        'options' => [
+                            'min' => 2,
+                            'max' => 128
+                        ]
+                    ]
+                ]
             ],
         ];
     }

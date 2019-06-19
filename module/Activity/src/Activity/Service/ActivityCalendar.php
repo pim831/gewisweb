@@ -6,6 +6,7 @@ use Activity\Model\ActivityCalendarOption;
 use Activity\Model\ActivityCalendarOption as OptionModel;
 use Application\Service\AbstractAclService;
 use Activity\Model\ActivityOptionProposal as ProposalModel;
+use Decision\Model\Organ as OrganModel;
 
 class ActivityCalendar extends AbstractAclService
 {
@@ -128,17 +129,23 @@ class ActivityCalendar extends AbstractAclService
         $em->persist($proposal);
         $em->flush();
 
+        $options = $form->get('options');
+
+        foreach ($options as $option) {
+            $this->createOption($option, $proposal->getId());
+        }
+
         return $proposal;
     }
 
     /**
      * @param $data
+     * @param int $proposal_id
      * @return OptionModel|bool
      * @throws \Exception
      */
-    public function createOption($data)
+    public function createOption($data, $proposal_id)
     {
-        $proposal = null;
         $form = $this->getCreateOptionForm();
         $option = new OptionModel();
         $form->bind($option);
@@ -149,7 +156,7 @@ class ActivityCalendar extends AbstractAclService
         }
 
         $em = $this->getEntityManager();
-        $option->setProposal($proposal);
+        $option->setProposal($proposal_id);
         $em->persist($option);
         $em->flush();
 
@@ -222,14 +229,36 @@ class ActivityCalendar extends AbstractAclService
     }
 
     /**
-     * Returns whether a member may create a new activity proposal
+     * Retrieves all organs which the current user is allowed to edit and for which the organs can still create proposals
+     *
+     * @return array
+     * @throws \Exception
+     */
+    public function getEditableOrgans()
+    {
+        $all_organs = $this->getOrganService()->getEditableOrgans();
+        $organs = array();
+        foreach ($all_organs as $organ) {
+            if ($this->canOrganCreateProposal($organ->getId())) {
+                $organs.append($organ);
+            }
+        }
+        return $organs;
+    }
+
+    /**
+     * Returns whether an organ may create a new activity proposal
      *
      * @param int $organ_id
      * @return bool
      * @throws \Exception
      */
-    protected function canCreateProposal($organ_id)
+    protected function canOrganCreateProposal($organ_id)
     {
+        if (!$this->isAllowed('create_always')) {
+            return true;
+        }
+
         if (!$this->isAllowed('create')) {
             return false;
         }
@@ -254,6 +283,19 @@ class ActivityCalendar extends AbstractAclService
     }
 
     /**
+     * Returns whether a member may create a new activity proposal
+     *
+     * @return bool
+     * @throws \Exception
+     */
+    public function canCreateProposal()
+    {
+        $organs = $this->getEditableOrgans();
+
+        return !empty($organs);
+    }
+
+    /**
      * Get the current ActivityOptionCreationPeriod
      *
      * @return \Activity\Model\ActivityOptionCreationPeriod
@@ -271,10 +313,10 @@ class ActivityCalendar extends AbstractAclService
      * @return int
      */
     protected function getCurrentProposalCount($period, $organ_id) {
-        $mapper = $this->getActivityCalendarOptionMapper();
+        $mapper = $this->getActivityCalendarProposalMapper();
         $begin = $period->getBeginPlanningTime();
         $end = $period->getEndPlanningTime();
-        $options = $mapper->getOptionsWithinPeriodAndOrgan($begin, $end, $organ_id);
+        $options = $mapper->getNonClosedProposalsWithinPeriodAndOrgan($begin, $end, $organ_id);
         return len($options);
     }
 

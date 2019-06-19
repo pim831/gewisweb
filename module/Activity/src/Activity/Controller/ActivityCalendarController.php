@@ -18,8 +18,8 @@ class ActivityCalendarController extends AbstractActionController
             'editableOptions' => $service->getEditableUpcomingOptions(),
             'APIKey'          => $config['google_api_key'],
             'calendarKey'     => $config['google_calendar_key'],
-            'form'            => $service->getCreateOptionForm(),
-            'success'         => $this->getRequest()->getQuery('success', false)
+            'success'         => $this->getRequest()->getQuery('success', false),
+            'canCreate'         => $service->canCreateProposal()
         ]);
     }
 
