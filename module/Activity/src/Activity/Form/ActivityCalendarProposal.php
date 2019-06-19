@@ -6,6 +6,7 @@ use Decision\Model\Organ;
 use Zend\Form\Form;
 use Zend\Mvc\I18n\Translator;
 use Zend\InputFilter\InputFilterProviderInterface;
+use Zend\Stdlib\Hydrator\ClassMethods as ClassMethodsHydrator;
 
 class ActivityCalendarProposal extends Form implements InputFilterProviderInterface
 {
@@ -18,6 +19,8 @@ class ActivityCalendarProposal extends Form implements InputFilterProviderInterf
     public function __construct(array $organs, Translator $translator)
     {
         parent::__construct();
+        $this->setAttribute('method', 'post');
+        $this->setHydrator(new ClassMethodsHydrator(false));
         $this->translator = $translator;
 
         $organOptions = [];
