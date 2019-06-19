@@ -126,7 +126,7 @@ class ActivityCalendar extends AbstractAclService
         $em->persist($proposal);
         $em->flush();
 
-        $options = $form->getData()['options'];
+        $options = $form->get('options')->getValue();
         foreach ($options as $option) {
             $result = $this->createOption($option, $proposal->getId());
             if ($result == false) {
