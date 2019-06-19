@@ -78,7 +78,7 @@ class ActivityOptionProposal
             ->where('a.beginTime > :begin')
             ->andWhere('a.beginTime < :end')
             ->andWhere('b.organ = :organ')
-            ->andWhere('a.status != deleted')
+            ->andWhere("a.status != 'deleted'")
             ->setParameter('begin', $begin)
             ->setParameter('end', $end)
             ->setParameter('organ', $organ_id);

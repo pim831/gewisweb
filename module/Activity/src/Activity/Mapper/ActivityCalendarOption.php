@@ -74,7 +74,7 @@ class ActivityCalendarOption
             ->orderBy('a.beginTime', 'ASC');
 
         if (!$withDeleted) {
-            $qb->andWhere('a.status != deleted');
+            $qb->andWhere("a.status != 'deleted'");
         }
         $qb->setParameter('now', new \DateTime());
 
@@ -97,7 +97,7 @@ class ActivityCalendarOption
             ->orderBy('a.beginTime', 'ASC');
 
         if (!$withDeleted) {
-            $qb->andWhere('a.status != deleted');
+            $qb->andWhere("a.status != 'deleted'");
         }
         $qb->setParameter('before', $before);
 
