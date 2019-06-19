@@ -30,7 +30,7 @@ class ActivityCalendarProposal extends Form implements InputFilterProviderInterf
             'type' => 'select',
             'options' => [
                 'empty_option' => [
-                    'label'    => $translator->translate('Please select an option'),
+                    'label'    => $translator->translate('Select an option'),
                     'selected' => 'selected',
                     'disabled' => 'disabled',
                 ],
@@ -56,7 +56,7 @@ class ActivityCalendarProposal extends Form implements InputFilterProviderInterf
             'name' => 'options',
             'type' => 'Zend\Form\Element\Collection',
             'options' => [
-                'count' => 0,
+                'count' => 1,
                 'should_create_template' => true,
                 'allow_add' => true,
                 'target_element' => new ActivityCalendarOption($translator)
