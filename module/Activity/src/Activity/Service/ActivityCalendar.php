@@ -35,7 +35,7 @@ class ActivityCalendar extends AbstractAclService
         }
         $user = $this->sm->get('user_service_user')->getIdentity();
 
-        return $this->getActivityCalendarOptionMapper()->getUpcomingOptionsByOrgan(
+        return $this->getActivityCalendarOptionMapper()->getUpcomingOptionsByOrgans(
             $this->getMemberMapper()->findOrgans($user->getMember())
         );
     }

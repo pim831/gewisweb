@@ -36,19 +36,20 @@ class ActivityCalendarOption
     }
 
     /**
-     * Gets all options created by the given organs or user
+     * Gets all options created by the given organs
      *
      * @param $organs
      * @param $user
      *
      * @return array
      */
-    public function getUpcomingOptionsByOrgan($organs)
+    public function getUpcomingOptionsByOrgans($organs)
     {
         $qb = $this->em->createQueryBuilder();
         $qb->select('a')
             ->from('Activity\Model\ActivityCalendarOption', 'a')
-            ->join('Activity\Model\ActivityOptionProposal', 'b')
+            ->from('Activity\Model\ActivityOptionProposal', 'b')
+            ->where('a.proposal = b.id')
             ->where('a.endTime > :now')
             ->andWhere('b.organ IN (:organs)')
             ->orderBy('a.beginTime', 'ASC');
@@ -145,7 +146,8 @@ class ActivityCalendarOption
         $qb = $this->em->createQueryBuilder();
         $qb->select('a')
             ->from('Activity\Model\ActivityCalendarOption', 'a')
-            ->join('Activity\Model\ActivityOptionProposal', 'b')
+            ->from('Activity\Model\ActivityOptionProposal', 'b')
+            ->where('a.proposal = b.id')
             ->where('a.beginTime > :begin')
             ->andWhere('a.beginTime < :end')
             ->andWhere('b.organ = :organ')
