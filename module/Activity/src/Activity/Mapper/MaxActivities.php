@@ -31,12 +31,14 @@ class MaxActivities
     {
         return $this->getRepository()->find($id);
     }
+
     /**
      * Finds the MaxActivityOptions model with the given organ and period
      *
      * @param int $organ_id
      * @param int $period_id
      * @return MaxActivityOptionsModel
+     * @throws \Doctrine\ORM\NonUniqueResultException
      */
     public function getMaxActivityOptionsByOrganPeriod($organ_id, $period_id)
     {
@@ -44,7 +46,7 @@ class MaxActivities
         $qb->select('x')
             ->from('Activity\Model\MaxActivities', 'x')
             ->where('x.organ = :organ')
-            ->andWhere('x.period = :period')
+            ->where('x.period = :period')
             ->setParameter('organ', $organ_id)
             ->setParameter('period', $period_id)
             ->setMaxResults(1);

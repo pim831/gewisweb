@@ -43,17 +43,17 @@ class ActivityCalendarOption
      *
      * @return array
      */
-    public function getUpcomingOptionsByOrganOrUser($organs, $user)
+    public function getUpcomingOptionsByOrgan($organs)
     {
         $qb = $this->em->createQueryBuilder();
         $qb->select('a')
             ->from('Activity\Model\ActivityCalendarOption', 'a')
+            ->join('Activity\Model\ActivityOptionProposal', 'b')
             ->where('a.endTime > :now')
-            ->andWhere('a.creator = :user OR a.organ IN (:organs)')
+            ->andWhere('b.organ IN (:organs)')
             ->orderBy('a.beginTime', 'ASC');
 
         $qb->setParameter('now', new \DateTime())
-            ->setParameter('user', $user)
             ->setParameter('organs', $organs);
 
         return $qb->getQuery()->getResult();
@@ -74,7 +74,7 @@ class ActivityCalendarOption
             ->orderBy('a.beginTime', 'ASC');
 
         if (!$withDeleted) {
-            $qb->andWhere('a.modifiedBy IS NULL');
+            $qb->andWhere('a.status != deleted');
         }
         $qb->setParameter('now', new \DateTime());
 
@@ -97,7 +97,7 @@ class ActivityCalendarOption
             ->orderBy('a.beginTime', 'ASC');
 
         if (!$withDeleted) {
-            $qb->andWhere('a.modifiedBy IS NULL');
+            $qb->andWhere('a.status != deleted');
         }
         $qb->setParameter('before', $before);
 
@@ -158,27 +158,6 @@ class ActivityCalendarOption
             $qb->andWhere('a.status = :status')
                 ->setParameter('status', $status);
         }
-
-        return $qb->getQuery()->getResult();
-    }
-
-    /**
-     * Retrieves upcoming, non-deleted options by name
-     *
-     * @param $name
-     *
-     * @return array
-     */
-    public function findOptionsByName($name)
-    {
-        $qb = $this->em->createQueryBuilder();
-        $qb->select('a')
-            ->from('Activity\Model\ActivityCalendarOption', 'a')
-            ->where('a.endTime > :now')
-            ->andWhere('a.name LIKE :name')
-            ->andWhere('a.modifiedBy IS NULL')
-            ->setParameter('now', new \DateTime())
-            ->setParameter('name', '%' . $name . '%');
 
         return $qb->getQuery()->getResult();
     }
