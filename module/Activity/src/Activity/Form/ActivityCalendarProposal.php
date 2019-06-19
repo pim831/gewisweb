@@ -21,12 +21,6 @@ class ActivityCalendarProposal extends Form implements InputFilterProviderInterf
         parent::__construct();
         $this->setHydrator(new ClassMethodsHydrator(false));
         $this->translator = $translator;
-        $this->setAttribute('method', 'post');
-
-        $this->add([
-            'name' => 'security',
-            'type' => 'Zend\Form\Element\Csrf'
-        ]);
 
         $organOptions = [];
         foreach ($organs as $organ) {
