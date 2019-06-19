@@ -111,7 +111,7 @@ class ActivityCalendar extends AbstractAclService
             return false;
         }
 
-        $organ = $form->get('organ');
+        $organ = $form->getData()['organ'];
         if (!$this->canOrganCreateProposal($organ)) {
             return false;
         }
@@ -123,7 +123,7 @@ class ActivityCalendar extends AbstractAclService
         $em->persist($proposal);
         $em->flush();
 
-        $options = $form->get('options');
+        $options = $form->getData()['options'];
         foreach ($options as $option) {
             $result = $this->createOption($option, $proposal->getId());
             if ($result == false) {
