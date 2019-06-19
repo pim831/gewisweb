@@ -14,11 +14,13 @@ class ActivityCalendarOption extends Fieldset implements InputFilterProviderInte
      * ActivityCalendarOption constructor.
      *
      * @param Translator $translator
+     * @param \Activity\Service\ActivityCalendar $calendarService
      */
     public function __construct(Translator $translator, $calendarService)
     {
         parent::__construct();
         $this->translator = $translator;
+        $this->calendarService = $calendarService;
 
         $typeOptions = [
             $translator->translate('Lunch lecture'),
