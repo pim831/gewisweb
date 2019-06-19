@@ -2,7 +2,6 @@
 namespace Activity\Mapper;
 use Option\Model\ActivityOptionCreationPeriod as ActivityOptionCreationPeriodModel;
 use DateTime;
-use Decision\Model\Organ;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
 use Exception;
