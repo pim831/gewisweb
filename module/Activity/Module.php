@@ -81,7 +81,9 @@ class Module
                     return $form;
                 },
                 'activity_form_calendar_option' => function ($sm) {
-                    $form = new Form\ActivityCalendarOption($sm->get('translator'));
+                    $translator = $sm->get('translator');
+                    $calendarService = $sm->get('activity_service_calendar');
+                    $form = new Form\ActivityCalendarOption($translator, $calendarService);
                     return $form;
                 },
                 'activity_hydrator' => function ($sm) {
