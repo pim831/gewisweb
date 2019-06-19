@@ -19,7 +19,6 @@ class ActivityCalendarProposal extends Form implements InputFilterProviderInterf
     public function __construct(array $organs, Translator $translator)
     {
         parent::__construct();
-        $this->setAttribute('method', 'post');
         $this->setHydrator(new ClassMethodsHydrator(false));
         $this->translator = $translator;
 

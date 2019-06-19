@@ -151,9 +151,9 @@ class ActivityCalendar extends AbstractAclService
         $form->bind($option);
         $form->setData($data);
 
-//        if (!$form->isValid()) {
-//            return false;
-//        }
+        if (!$form->isValid()) {
+            return false;
+        }
 
         $em = $this->getEntityManager();
         $option->setProposal($proposal_id);
