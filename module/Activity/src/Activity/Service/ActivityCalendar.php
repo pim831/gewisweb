@@ -127,7 +127,7 @@ class ActivityCalendar extends AbstractAclService
         $em->persist($proposal);
         $em->flush();
 
-        $options = $data['options'];
+        $options = $validatedData['options'];
         foreach ($options as $option) {
             $result = $this->createOption($option, $proposal->getId());
             if ($result == false) {
