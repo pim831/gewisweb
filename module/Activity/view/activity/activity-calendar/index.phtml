@@ -165,8 +165,8 @@ $this->headLink()
             "organizer": "<?= $option->getProposal()->getOrgan() === null ? $option->getProposal()->getCreator()->getMember()->getFullName() : $option->getProposal()->getOrgan()->getAbbr() ?>",
             "url": "#",
             "class": "event-info",
-            "start": undefined,
-            "end": undefined,
+            "start": <?= $option->getBeginTime()->getTimestamp() * 1000 ?>,
+            "end": <?= $option->getEndTime()->getTimestamp() * 1000 ?>,
         },
         <?php endforeach ?>
     ];
