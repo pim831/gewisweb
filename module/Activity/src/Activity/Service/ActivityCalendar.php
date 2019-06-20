@@ -129,7 +129,7 @@ class ActivityCalendar extends AbstractAclService
 
         $options = $validatedData['options'];
         foreach ($options as $option) {
-            $result = $this->createOption($option, $proposal->getId());
+            $result = $this->createOption($option, $proposal);
             if ($result == false) {
                 return false;
             }
@@ -144,7 +144,7 @@ class ActivityCalendar extends AbstractAclService
      * @return OptionModel|bool
      * @throws \Exception
      */
-    public function createOption($data, $proposal_id)
+    public function createOption($data, $proposal)
     {
 //        $form = $this->getCreateOptionForm();
         $option = new OptionModel();
@@ -157,7 +157,7 @@ class ActivityCalendar extends AbstractAclService
         $validatedData = $data;
 
         $em = $this->getEntityManager();
-        $option->setProposal($proposal_id);
+        $option->setProposal($proposal);
         $beginTime = $validatedData['beginTime'];
         $option->setBeginTime($beginTime);
         $endTime = $validatedData['endTime'];
