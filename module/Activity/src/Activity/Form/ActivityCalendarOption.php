@@ -124,9 +124,9 @@ class ActivityCalendarOption extends Fieldset implements InputFilterProviderInte
     public function beforeEndTime($value, $context = [])
     {
         try {
-            $endTime = isset($context['endTime']) ? $this->toDateTime($context['endTime']) : new \DateTime('now');
+            $endTime = isset($context['endTime']) ? $this->calendarService->toDateTime($context['endTime']) : new \DateTime('now');
 
-            return $this->toDateTime($value) <= $endTime;
+            return $this->calendarService->toDateTime($value) <= $endTime;
         } catch (\Exception $e) {
             return false;
         }
@@ -144,7 +144,7 @@ class ActivityCalendarOption extends Fieldset implements InputFilterProviderInte
         try {
             $today = new \DateTime();
 
-            return $this->toDateTime($value) > $today;
+            return $this->calendarService->toDateTime($value) > $today;
         } catch (\Exception $e) {
             return false;
         }
@@ -161,16 +161,11 @@ class ActivityCalendarOption extends Fieldset implements InputFilterProviderInte
     public function cannotPlanInPeriod($value, $context = [])
     {
         try {
-            $begin_time = $this->toDateTime($value);
+            $begin_time = $this->calendarService->toDateTime($value);
             $result = $this->calendarService->canCreateOption($begin_time);
             return !$result;
         } catch (\Exception $e) {
             return false;
         }
-    }
-
-    private function toDateTime($value, $format = 'd/m/Y')
-    {
-        return \DateTime::createFromFormat($format, $value);
     }
 }
