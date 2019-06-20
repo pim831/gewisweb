@@ -1,9 +1,11 @@
 <?php
+
 namespace Activity\Mapper;
-use Option\Model\MaxActivityOptions as MaxActivityOptionsModel;
-use Decision\Model\Organ;
+
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
+use Option\Model\MaxActivityOptions as MaxActivityOptionsModel;
+
 class MaxActivities
 {
     /**
@@ -12,6 +14,7 @@ class MaxActivities
      * @var EntityManager
      */
     protected $em;
+
     /**
      * Constructor.
      *
@@ -21,6 +24,7 @@ class MaxActivities
     {
         $this->em = $em;
     }
+
     /**
      * Finds the MaxActivityOptions model with the given id.
      *

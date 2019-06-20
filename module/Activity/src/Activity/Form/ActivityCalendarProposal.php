@@ -2,10 +2,9 @@
 
 namespace Activity\Form;
 
-use Decision\Model\Organ;
 use Zend\Form\Form;
-use Zend\Mvc\I18n\Translator;
 use Zend\InputFilter\InputFilterProviderInterface;
+use Zend\Mvc\I18n\Translator;
 
 class ActivityCalendarProposal extends Form implements InputFilterProviderInterface
 {
@@ -35,7 +34,7 @@ class ActivityCalendarProposal extends Form implements InputFilterProviderInterf
             'type' => 'select',
             'options' => [
                 'empty_option' => [
-                    'label'    => $translator->translate('Select an option'),
+                    'label' => $translator->translate('Select an option'),
                     'selected' => 'selected',
                     'disabled' => 'disabled',
                 ],

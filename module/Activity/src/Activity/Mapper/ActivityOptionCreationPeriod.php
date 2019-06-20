@@ -1,10 +1,13 @@
 <?php
+
 namespace Activity\Mapper;
-use Option\Model\ActivityOptionCreationPeriod as ActivityOptionCreationPeriodModel;
+
 use DateTime;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
 use Exception;
+use Option\Model\ActivityOptionCreationPeriod as ActivityOptionCreationPeriodModel;
+
 class ActivityOptionCreationPeriod
 {
     /**
@@ -13,6 +16,7 @@ class ActivityOptionCreationPeriod
      * @var EntityManager
      */
     protected $em;
+
     /**
      * Constructor.
      *
@@ -22,6 +26,7 @@ class ActivityOptionCreationPeriod
     {
         $this->em = $em;
     }
+
     /**
      * Finds the ActivityOptionCreationPeriod model with the given id.
      *
@@ -32,6 +37,7 @@ class ActivityOptionCreationPeriod
     {
         return $this->getRepository()->find($id);
     }
+
     /**
      * Finds the ActivityOptionCreationPeriod model that is currently active
      *
@@ -51,6 +57,7 @@ class ActivityOptionCreationPeriod
             ->setMaxResults(1);
         return $qb->getQuery()->getOneOrNullResult();
     }
+
     /**
      * Finds the ActivityOptionCreationPeriod model that will be active next
      *

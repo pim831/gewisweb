@@ -1,8 +1,11 @@
 <?php
+
 namespace Activity\Mapper;
-use Option\Model\ActivityOptionProposal as ActivityOptionProposalModel;
+
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
+use Option\Model\ActivityOptionProposal as ActivityOptionProposalModel;
+
 class ActivityOptionProposal
 {
     /**
@@ -11,6 +14,7 @@ class ActivityOptionProposal
      * @var EntityManager
      */
     protected $em;
+
     /**
      * Constructor.
      *
@@ -20,6 +24,7 @@ class ActivityOptionProposal
     {
         $this->em = $em;
     }
+
     /**
      * Finds the ActivityOptionProposal model with the given id.
      *

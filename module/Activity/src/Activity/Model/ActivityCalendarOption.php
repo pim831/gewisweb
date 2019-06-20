@@ -2,9 +2,7 @@
 
 namespace Activity\Model;
 
-use Decision\Model\Organ;
 use Doctrine\ORM\Mapping as ORM;
-use User\Permissions\Resource\OrganResourceInterface;
 
 /**
  * Activity calendar option model.
