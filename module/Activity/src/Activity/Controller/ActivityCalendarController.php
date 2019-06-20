@@ -14,12 +14,12 @@ class ActivityCalendarController extends AbstractActionController
         $config = $service->getConfig();
 
         return new ViewModel([
-            'options'         => $service->getUpcomingOptions(),
+            'options' => $service->getUpcomingOptions(),
             'editableOptions' => $service->getEditableUpcomingOptions(),
-            'APIKey'          => $config['google_api_key'],
-            'calendarKey'     => $config['google_calendar_key'],
-            'success'         => $this->getRequest()->getQuery('success', false),
-            'canCreate'       => $service->canCreateProposal()
+            'APIKey' => $config['google_api_key'],
+            'calendarKey' => $config['google_calendar_key'],
+            'success' => $this->getRequest()->getQuery('success', false),
+            'canCreate' => $service->canCreateProposal()
         ]);
     }
 
@@ -63,17 +63,17 @@ class ActivityCalendarController extends AbstractActionController
 
         if ($period != null) {
             return new ViewModel([
-                'period'  => true,
-                'begin'   => $period->getBeginOptionTime(),
-                'end'     => $period->getEndOptionTime(),
-                'form'    => $form,
+                'period' => true,
+                'begin' => $period->getBeginOptionTime(),
+                'end' => $period->getEndOptionTime(),
+                'form' => $form,
                 'success' => $success,
             ]);
         }
 
         return new ViewModel([
-            'period'  => false,
-            'form'    => $form,
+            'period' => false,
+            'form' => $form,
             'success' => $success,
         ]);
     }

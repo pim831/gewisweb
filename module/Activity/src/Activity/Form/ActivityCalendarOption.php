@@ -51,7 +51,7 @@ class ActivityCalendarOption extends Fieldset implements InputFilterProviderInte
             'type' => 'select',
             'options' => [
                 'empty_option' => [
-                    'label'    => $translator->translate('Select a type'),
+                    'label' => $translator->translate('Select a type'),
                     'selected' => 'selected',
                     'disabled' => 'disabled',
                 ],
