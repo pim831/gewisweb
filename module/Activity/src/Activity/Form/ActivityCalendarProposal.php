@@ -104,7 +104,7 @@ class ActivityCalendarProposal extends Form implements InputFilterProviderInterf
                                     $this->translator->translate('The activity does now have an acceptable amount of options'),
                             ],
                             'callback' => function ($value, $context = []) {
-                                return $this->isBadOptionCount($value, $context);
+                                return $this->isGoodOptionCount($value, $context);
                             }
                         ],
                     ],
@@ -121,15 +121,14 @@ class ActivityCalendarProposal extends Form implements InputFilterProviderInterf
      * @param array $context
      * @return bool
      */
-    public function isBadOptionCount($value, $context = [])
+    public function isGoodOptionCount($value, $context = [])
     {
-        return true;
         if (count($value) < 1) {
-            return true;
+            return false;
         }
         if (count($value) > $this->maxOptions) {
-            return true;
+            return false;
         }
-        return false;
+        return true;
     }
 }
