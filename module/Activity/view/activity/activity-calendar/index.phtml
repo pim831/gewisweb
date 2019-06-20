@@ -72,6 +72,7 @@ $this->headLink()
                 <tr>
                     <th><?= $this->translate('Creator') ?></th>
                     <th><?= $this->translate('Name') ?></th>
+                    <th><?= $this->translate('Type') ?></th>
                     <th><?= $this->translate('Created at') ?></th>
                     <th><?= $this->translate('Start') ?></th>
                     <th><?= $this->translate('End') ?></th>
@@ -84,6 +85,7 @@ $this->headLink()
 
                         <td><?= $option->getProposal()->getOrgan() === null ? $option->getProposal()->getCreator()->getMember()->getFullName() : $option->getProposal()->getOrgan()->getAbbr() ?></td>
                         <td><?= $this->escapeHtml($option->getProposal()->getName()) ?></td>
+                        <td><?= $this->escapeHtml($option->getType()) ?></td>
                         <td><?= $option->getProposal()->getCreationTime()->format('d-m-Y') ?></td>
                         <td><?= $option->getBeginTime()->format('d-m-Y') ?></td>
                         <td><?= $option->getEndTime()->format('d-m-Y') ?></td>
