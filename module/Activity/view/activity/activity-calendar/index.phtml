@@ -158,7 +158,7 @@ $this->headLink()
     var calendarItems = [
         <?php foreach($options as $option): ?>
         {
-            "isPlanned": <?= $option->getStatus() === 'approved' ? 'approved' : 'false' ?>,
+            "isPlanned": <?= $option->getStatus() === 'approved' ? 'true' : 'false' ?>,
             "isOwner": <?= in_array($option, $editableOptions) ? 'true' : 'false' ?>,
             "id": "<?= $option->getId() ?>",
             "title": "<?= $this->escapeHtml($option->getProposal()->getName()) ?>",
