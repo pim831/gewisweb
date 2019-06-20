@@ -85,8 +85,8 @@ $this->headLink()
                         <td><?= $option->getProposal()->getOrgan() === null ? $option->getProposal()->getCreator()->getMember()->getFullName() : $option->getProposal()->getOrgan()->getAbbr() ?></td>
                         <td><?= $this->escapeHtml($option->getProposal()->getName()) ?></td>
                         <td><?= $option->getProposal()->getCreationTime()->format('d-m-Y') ?></td>
-                        <td><?= $option->getBeginTime()->format('d-m-Y H:i') ?></td>
-                        <td><?= $option->getEndTime()->format('d-m-Y H:i') ?></td>
+                        <td><?= $option->getBeginTime()->format('d-m-Y') ?></td>
+                        <td><?= $option->getEndTime()->format('d-m-Y') ?></td>
                         <td>
                             <?php if($option->getModifiedBy() === null): ?>
                                 <a class="btn btn-xs btn-delete btn-danger" href="javascript:showDeleteModal(<?= $option->getId() ?>)">
@@ -178,8 +178,8 @@ $this->headLink()
                     "title": item.summary,
                     "url": item.htmlLink,
                     "class": "event-important",
-                    "start": (new Date(item.start.dateTime !== undefined ? item.start.dateTime : item.start.date)).getTime(),
-                    "end": (new Date(item.end.dateTime !== undefined ? item.end.dateTime : item.end.date)).getTime(),
+                    "start": undefined,
+                    "end": undefined,
                 });
             }
         });
