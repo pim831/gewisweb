@@ -146,14 +146,15 @@ class ActivityCalendar extends AbstractAclService
      */
     public function createOption($data, $proposal_id)
     {
-        $form = $this->getCreateOptionForm();
+//        $form = $this->getCreateOptionForm();
         $option = new OptionModel();
-        $form->setData($data);
-
-        if (!$form->isValid()) {
-            return false;
-        }
-        $validatedData = $form->getData();
+//        $form->setData($data);
+//
+//        if (!$form->isValid()) {
+//            return false;
+//        }
+//        $validatedData = $form->getData();
+        $validatedData = $data;
 
         $em = $this->getEntityManager();
         $option->setProposal($proposal_id);
