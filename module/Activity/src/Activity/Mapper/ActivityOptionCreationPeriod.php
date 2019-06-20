@@ -39,6 +39,16 @@ class ActivityOptionCreationPeriod
     }
 
     /**
+     * Get the repository for this mapper.
+     *
+     * @return EntityRepository
+     */
+    public function getRepository()
+    {
+        return $this->em->getRepository('Activity\Model\ActivityOptionCreationPeriod');
+    }
+
+    /**
      * Finds the ActivityOptionCreationPeriod model that is currently active
      *
      * @return ActivityOptionCreationPeriod
@@ -75,16 +85,5 @@ class ActivityOptionCreationPeriod
             ->setParameter('today', $today)
             ->setMaxResults(1);
         return $qb->getQuery()->getOneOrNullResult();
-    }
-
-
-    /**
-     * Get the repository for this mapper.
-     *
-     * @return EntityRepository
-     */
-    public function getRepository()
-    {
-        return $this->em->getRepository('Activity\Model\ActivityOptionCreationPeriod');
     }
 }

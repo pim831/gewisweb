@@ -2,9 +2,12 @@
 
 namespace Activity\Form;
 
+use Activity\Service\ActivityCalendar;
+use Exception;
 use Zend\Form\Form;
 use Zend\InputFilter\InputFilterProviderInterface;
 use Zend\Mvc\I18n\Translator;
+use Zend\Validator\Callback;
 
 class ActivityCalendarProposal extends Form implements InputFilterProviderInterface
 {
@@ -12,8 +15,8 @@ class ActivityCalendarProposal extends Form implements InputFilterProviderInterf
 
     /**
      * @param Translator $translator
-     * @param \Activity\Service\ActivityCalendar $calendarService
-     * @throws \Exception
+     * @param ActivityCalendar $calendarService
+     * @throws Exception
      */
     public function __construct(Translator $translator, $calendarService)
     {
@@ -99,7 +102,7 @@ class ActivityCalendarProposal extends Form implements InputFilterProviderInterf
                         'name' => 'callback',
                         'options' => [
                             'messages' => [
-                                \Zend\Validator\Callback::INVALID_VALUE =>
+                                Callback::INVALID_VALUE =>
                                     $this->translator->translate('The activity does now have an acceptable amount of options'),
                             ],
                             'callback' => function ($value, $context = []) {

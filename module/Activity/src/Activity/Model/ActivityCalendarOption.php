@@ -67,14 +67,6 @@ class ActivityCalendarOption
     /**
      * @return mixed
      */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * @return mixed
-     */
     public function getBeginTime()
     {
         return $this->beginTime;
@@ -153,7 +145,7 @@ class ActivityCalendarOption
     }
 
     /**
-     * @return \Activity\Model\ActivityOptionProposal
+     * @return ActivityOptionProposal
      */
     public function getProposal()
     {
@@ -161,7 +153,7 @@ class ActivityCalendarOption
     }
 
     /**
-     * @param \Activity\Model\ActivityOptionProposal $proposal
+     * @param ActivityOptionProposal $proposal
      */
     public function setProposal($proposal)
     {
@@ -176,5 +168,13 @@ class ActivityCalendarOption
     public function getResourceId()
     {
         return $this->getId();
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
     }
 }

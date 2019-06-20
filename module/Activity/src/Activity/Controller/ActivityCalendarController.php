@@ -2,6 +2,7 @@
 
 namespace Activity\Controller;
 
+use Activity\Service\ActivityCalendar;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 
@@ -21,6 +22,16 @@ class ActivityCalendarController extends AbstractActionController
             'success' => $this->getRequest()->getQuery('success', false),
             'canCreate' => $service->canCreateProposal()
         ]);
+    }
+
+    /**
+     * Get the activity calendar service
+     *
+     * @return ActivityCalendar
+     */
+    private function getActivityCalendarService()
+    {
+        return $this->getServiceLocator()->get('activity_service_calendar');
     }
 
     public function deleteAction()
@@ -81,15 +92,5 @@ class ActivityCalendarController extends AbstractActionController
     public function sendNotificationsAction()
     {
         $this->getActivityCalendarService()->sendOverdueNotifications();
-    }
-
-    /**
-     * Get the activity calendar service
-     *
-     * @return \Activity\Service\ActivityCalendar
-     */
-    private function getActivityCalendarService()
-    {
-        return $this->getServiceLocator()->get('activity_service_calendar');
     }
 }

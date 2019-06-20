@@ -65,22 +65,25 @@ $form->prepare();
 <!--        --><?php //endif ?>
         <?= $this->form()->openTag($form) ?>
         <?php if ($success === true): ?>
-        <div class="row spacing-top--md">
-            <div class="col-md-12">
-                <div class="alert alert-success" role="alert">
-                    <p><span class="glyphicon glyphicon-ok"></span> <?= $this->translate('The activity has been saved') ?></p>
+            <div class="row spacing-top--md">
+                <div class="col-md-12">
+                    <div class="alert alert-success" role="alert">
+                        <p><span
+                                class="glyphicon glyphicon-ok"></span> <?= $this->translate('The activity has been saved') ?>
+                        </p>
+                    </div>
                 </div>
             </div>
-        </div>
         <?php endif ?>
         <?php if ($success === false): ?>
-        <div class="row spacing-top--md">
-            <div class="col-md-12">
-                <div class="alert alert-danger" role="alert">
-                    <span class="glyphicon glyphicon-exclamation-sign"></span> <?= $this->translate('The activity could not be saved. Check and correct your input data.') ?>
+            <div class="row spacing-top--md">
+                <div class="col-md-12">
+                    <div class="alert alert-danger" role="alert">
+                        <span
+                            class="glyphicon glyphicon-exclamation-sign"></span> <?= $this->translate('The activity could not be saved. Check and correct your input data.') ?>
+                    </div>
                 </div>
             </div>
-        </div>
         <?php endif ?>
         <div class="row spacing-top--md">
             <div class="col-md-12">
@@ -94,8 +97,8 @@ $form->prepare();
                 ?>
                 <div class="form-group <?= $this->bootstrapElementError($organ) ?>">
                     <label
-                            for="<?= $organ->getAttribute('id') ?>"
-                            class="control-label<?= $form->getInputFilter()->get('organ')->isRequired() ? ' label-required' : '' ?>">
+                        for="<?= $organ->getAttribute('id') ?>"
+                        class="control-label<?= $form->getInputFilter()->get('organ')->isRequired() ? ' label-required' : '' ?>">
                         <?= $this->translate('Committee / fraternity') ?>
                     </label>
                     <?= $this->formSelect($organ) ?>
@@ -111,8 +114,8 @@ $form->prepare();
                 ?>
                 <div class="form-group <?= $this->bootstrapElementError($inputName) ?>">
                     <label
-                            for="<?= $inputName->getAttribute('id') ?>"
-                            class="control-label<?= $form->getInputFilter()->get('name')->isRequired() ? ' label-required' : '' ?>">
+                        for="<?= $inputName->getAttribute('id') ?>"
+                        class="control-label<?= $form->getInputFilter()->get('name')->isRequired() ? ' label-required' : '' ?>">
                         <?= $this->translate('Name') ?>
                     </label>
                     <?= $this->formInput($inputName) ?>
@@ -128,8 +131,8 @@ $form->prepare();
                 ?>
                 <div class="form-group <?= $this->bootstrapElementError($inputDescription) ?>">
                     <label
-                            for="<?= $inputDescription->getAttribute('id') ?>"
-                            class="control-label<?= $form->getInputFilter()->get('description')->isRequired() ? ' label-required' : '' ?>">
+                        for="<?= $inputDescription->getAttribute('id') ?>"
+                        class="control-label<?= $form->getInputFilter()->get('description')->isRequired() ? ' label-required' : '' ?>">
                         <?= $this->translate('Description') ?>
                     </label>
                     <?= $this->formTextarea($inputDescription) ?>

@@ -4,6 +4,7 @@ namespace Activity\Mapper;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\NonUniqueResultException;
 use Option\Model\MaxActivityOptions as MaxActivityOptionsModel;
 
 class MaxActivities
@@ -37,12 +38,22 @@ class MaxActivities
     }
 
     /**
+     * Get the repository for this mapper.
+     *
+     * @return EntityRepository
+     */
+    public function getRepository()
+    {
+        return $this->em->getRepository('Activity\Model\MaxActivities');
+    }
+
+    /**
      * Finds the MaxActivityOptions model with the given organ and period
      *
      * @param int $organ_id
      * @param int $period_id
      * @return MaxActivityOptionsModel
-     * @throws \Doctrine\ORM\NonUniqueResultException
+     * @throws NonUniqueResultException
      */
     public function getMaxActivityOptionsByOrganPeriod($organ_id, $period_id)
     {
@@ -55,16 +66,5 @@ class MaxActivities
             ->setParameter('period', $period_id)
             ->setMaxResults(1);
         return $qb->getQuery()->getOneOrNullResult();
-    }
-
-
-    /**
-     * Get the repository for this mapper.
-     *
-     * @return EntityRepository
-     */
-    public function getRepository()
-    {
-        return $this->em->getRepository('Activity\Model\MaxActivities');
     }
 }
