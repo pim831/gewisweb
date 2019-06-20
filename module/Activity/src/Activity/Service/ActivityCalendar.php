@@ -109,8 +109,9 @@ class ActivityCalendar extends AbstractAclService
         if (!$form->isValid()) {
             return false;
         }
+        $validatedData = $form->getData();
 
-        $organ = $form->getData()['organ'];
+        $organ = $validatedData['organ'];
         if (!$this->canOrganCreateProposal($organ)) {
             return false;
         }
@@ -118,15 +119,15 @@ class ActivityCalendar extends AbstractAclService
         $proposal->setCreationTime(new \DateTime());
         $em = $this->getEntityManager();
         $proposal->setCreator($this->sm->get('user_service_user')->getIdentity());
-        $name = $form->getData()['name'];
+        $name = $validatedData['name'];
         $proposal->setName($name);
-        $description = $form->getData()['description'];
+        $description = $validatedData['description'];
         $proposal->setDescription($description);
         $proposal->setOrgan($this->sm->get('decision_service_organ')->getOrgan($organ));
         $em->persist($proposal);
         $em->flush();
 
-        $options = $form->getData()['options'];
+        $options = $validatedData['options'];
         foreach ($options as $option) {
             $result = $this->createOption($option, $proposal->getId());
             if ($result == false) {
@@ -152,14 +153,15 @@ class ActivityCalendar extends AbstractAclService
         if (!$form->isValid()) {
             return false;
         }
+        $validatedData = $form->getData();
 
         $em = $this->getEntityManager();
         $option->setProposal($proposal_id);
-        $beginTime = $form->getData()['beginTime'];
+        $beginTime = $validatedData['beginTime'];
         $option->setBeginTime($beginTime);
-        $endTime = $form->getData()['endTime'];
+        $endTime = $validatedData['endTime'];
         $option->setEndTime($endTime);
-        $type = $form->getData()['type'];
+        $type = $validatedData['type'];
         $option->setType($type);
         $em->persist($option);
         $em->flush();
