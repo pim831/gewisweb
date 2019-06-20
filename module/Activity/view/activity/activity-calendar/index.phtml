@@ -80,7 +80,7 @@ $this->headLink()
                 </thead>
                 <tbody>
                 <?php foreach($editableOptions as $option): ?>
-                    <tr<?= $option->getModifiedBy() === null ? '' : ' class="danger"' ?>>
+                    <tr<?= $option->getStatus() === 'deleted' ? '' : ' class="danger"' ?> <?= $option->getStatus() === 'approved' ? '' : ' class="success"' ?>>
 
                         <td><?= $option->getOrgan() === null ? $option->getCreator()->getMember()->getFullName() : $option->getOrgan()->getAbbr() ?></td>
                         <td><?= $this->escapeHtml($option->getName()) ?></td>
