@@ -161,7 +161,7 @@ class ActivityCalendarOption extends Fieldset implements InputFilterProviderInte
     public function cannotPlanInPeriod($value, $context = [])
     {
         try {
-            $result = $this->calendarService->canCreateOption($value);
+            $result = $this->calendarService->canCreateOption($this->toDateTime($value));
             return !$result;
         } catch (\Exception $e) {
             return false;

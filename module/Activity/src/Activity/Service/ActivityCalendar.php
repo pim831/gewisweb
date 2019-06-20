@@ -289,11 +289,11 @@ class ActivityCalendar extends AbstractAclService
     /**
      * Returns whether a user may create an option with given start time
      *
-     * @param \DateTime $start_time
+     * @param \DateTime $begin_time
      * @return bool
      * @throws \Exception
      */
-    public function canCreateOption($start_time)
+    public function canCreateOption($begin_time)
     {
         if ($this->isAllowed('create_always')) {
             return true;
@@ -303,10 +303,10 @@ class ActivityCalendar extends AbstractAclService
         $begin = $period->getBeginOptionTime();
         $end = $period->getEndOptionTime();
 
-        if ($begin > $start_time) {
+        if ($begin > $begin_time) {
             return false;
         }
-        if ($start_time > $end) {
+        if ($begin_time > $end) {
             return false;
         }
 
