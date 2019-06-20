@@ -112,23 +112,23 @@ class ActivityCalendarProposal extends Form implements InputFilterProviderInterf
             ],
         ];
     }
-}
 
 
-/**
- * Check if a certain date is in the future
- *
- * @param $value
- * @param array $context
- * @return bool
- */
-public function isBadOptionCount($value, $context = [])
-{
-    if (count($value) < 1) {
-        return true;
+    /**
+     * Check if a certain date is in the future
+     *
+     * @param $value
+     * @param array $context
+     * @return bool
+     */
+    public function isBadOptionCount($value, $context = [])
+    {
+        if (count($value) < 1) {
+            return true;
+        }
+        if (count($value) > $this->maxOptions) {
+            return true;
+        }
+        return false;
     }
-    if (count($value) > $this->maxOptions) {
-        return true;
-    }
-    return false;
 }
