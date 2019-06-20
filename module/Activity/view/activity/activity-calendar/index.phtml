@@ -156,15 +156,15 @@ $this->headLink()
     var calendarItems = [
         <?php foreach($options as $option): ?>
         {
-            "isPlanned": "false",
+            "isPlanned": <?= $option->getStatus() === 'approved' ? 'approved' : 'false' ?>,
             "isOwner": <?= in_array($option, $editableOptions) ? 'true' : 'false' ?>,
             "id": "<?= $option->getId() ?>",
             "title": "<?= $this->escapeHtml($option->getProposal()->getName()) ?>",
             "organizer": "<?= $option->getProposal()->getOrgan() === null ? $option->getProposal()->getCreator()->getMember()->getFullName() : $option->getProposal()->getOrgan()->getAbbr() ?>",
             "url": "#",
             "class": "event-info",
-            "start": <?= $option->getBeginTime()->getTimestamp() * 1000 ?>,
-            "end": <?= $option->getEndTime()->getTimestamp() * 1000?>
+            "start": undefined,
+            "end": undefined,
         },
         <?php endforeach ?>
     ];
@@ -178,8 +178,8 @@ $this->headLink()
                     "title": item.summary,
                     "url": item.htmlLink,
                     "class": "event-important",
-                    "start": undefined,
-                    "end": undefined,
+                    "start": (new Date(item.start.dateTime !== undefined ? item.start.dateTime : item.start.date)).getTime(),
+                    "end": (new Date(item.end.dateTime !== undefined ? item.end.dateTime : item.end.date)).getTime(),
                 });
             }
         });
