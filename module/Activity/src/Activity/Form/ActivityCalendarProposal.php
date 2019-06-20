@@ -123,6 +123,7 @@ class ActivityCalendarProposal extends Form implements InputFilterProviderInterf
      */
     public function isBadOptionCount($value, $context = [])
     {
+        return true;
         if (count($value) < 1) {
             return true;
         }
