@@ -90,18 +90,18 @@ class ActivityCalendarOption extends Fieldset implements InputFilterProviderInte
                             }
                         ],
                     ],
-                    [
-                        'name' => 'callback',
-                        'options' => [
-                            'messages' => [
-                                \Zend\Validator\Callback::INVALID_VALUE =>
-                                    $this->translator->translate('The activity must be within the given period'),
-                            ],
-                            'callback' => function ($value, $context = []) {
-                                return $this->cannotPlanInPeriod($value, $context);
-                            }
-                        ],
-                    ],
+//                    [
+//                        'name' => 'callback',
+//                        'options' => [
+//                            'messages' => [
+//                                \Zend\Validator\Callback::INVALID_VALUE =>
+//                                    $this->translator->translate('The activity must be within the given period'),
+//                            ],
+//                            'callback' => function ($value, $context = []) {
+//                                return $this->cannotPlanInPeriod($value, $context);
+//                            }
+//                        ],
+//                    ],
                 ]
             ],
             'endTime' => [
@@ -160,7 +160,6 @@ class ActivityCalendarOption extends Fieldset implements InputFilterProviderInte
      */
     public function cannotPlanInPeriod($value, $context = [])
     {
-        return false;
         try {
             $begin_time = $this->toDateTime($value);
             $result = $this->calendarService->canCreateOption($begin_time);
