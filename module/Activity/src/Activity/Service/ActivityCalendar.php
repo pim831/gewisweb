@@ -158,9 +158,9 @@ class ActivityCalendar extends AbstractAclService
 
         $em = $this->getEntityManager();
         $option->setProposal($proposal);
-        $beginTime = $validatedData['beginTime'];
+        $beginTime = $this->toDateTime($validatedData['beginTime']);
         $option->setBeginTime($beginTime);
-        $endTime = $validatedData['endTime'];
+        $endTime = $this->toDateTime($validatedData['endTime']);
         $option->setEndTime($endTime);
         $type = $validatedData['type'];
         $option->setType($type);
@@ -481,5 +481,10 @@ class ActivityCalendar extends AbstractAclService
     public function getAcl()
     {
         return $this->sm->get('activity_acl');
+    }
+
+    public function toDateTime($value, $format = 'd/m/Y')
+    {
+        return \DateTime::createFromFormat($format, $value);
     }
 }
