@@ -31,7 +31,8 @@ class ActivityCalendarOption extends Fieldset implements InputFilterProviderInte
             'Morning' => $translator->translate('Morning'),
             'Afternoon' => $translator->translate('Afternoon'),
             'Evening' => $translator->translate('Evening'),
-            'Weekend' => $translator->translate('Weekend'),
+            'Day' => $translator->translate('Day'),
+            'Multiple days' => $translator->translate('Multiple days'),
         ];
 
         $this->add([
@@ -165,8 +166,8 @@ class ActivityCalendarOption extends Fieldset implements InputFilterProviderInte
     public function cannotPlanInPeriod($value, $context = [])
     {
         try {
-            $begin_time = $this->calendarService->toDateTime($value);
-            $result = $this->calendarService->canCreateOption($begin_time);
+            $beginTime = $this->calendarService->toDateTime($value);
+            $result = $this->calendarService->canCreateOption($beginTime);
             return !$result;
         } catch (Exception $e) {
             return false;
