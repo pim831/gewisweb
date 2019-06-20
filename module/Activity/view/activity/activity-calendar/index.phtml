@@ -73,7 +73,7 @@ $this->headLink()
                     <th><?= $this->translate('Creator') ?></th>
                     <th><?= $this->translate('Name') ?></th>
                     <th><?= $this->translate('Type') ?></th>
-                    <th><?= $this->translate('Created at') ?></th>
+<!--                    <th>--><?//= $this->translate('Created at') ?><!--</th>-->
                     <th><?= $this->translate('Start') ?></th>
                     <th><?= $this->translate('End') ?></th>
                     <th></th>
@@ -86,7 +86,7 @@ $this->headLink()
                         <td><?= $option->getProposal()->getOrgan() === null ? $option->getProposal()->getCreator()->getMember()->getFullName() : $option->getProposal()->getOrgan()->getAbbr() ?></td>
                         <td><?= $this->escapeHtml($option->getProposal()->getName()) ?></td>
                         <td><?= $this->escapeHtml($this->translate($option->getType())) ?></td>
-                        <td><?= $option->getProposal()->getCreationTime()->format('d-m-Y') ?></td>
+<!--                        <td>--><?//= $option->getProposal()->getCreationTime()->format('d-m-Y') ?><!--</td>-->
                         <td><?= $option->getBeginTime()->format('d-m-Y') ?></td>
                         <td><?= $option->getEndTime()->format('d-m-Y') ?></td>
                         <td>
@@ -156,7 +156,7 @@ $this->headLink()
     timeMin.setDate(timeMin.getDate() - 180);
     timeMinString = timeMin.toISOString();
     var calendarItems = [
-        <?php foreach($options as $option): ?>
+        <?php foreach($options as $option): if($option->getStatus() !== 'deleted'):?>
         {
             "isPlanned": <?= $option->getStatus() === 'approved' ? 'true' : 'false' ?>,
             "isOwner": <?= in_array($option, $editableOptions) ? 'true' : 'false' ?>,
@@ -168,7 +168,7 @@ $this->headLink()
             "start": <?= $option->getBeginTime()->getTimestamp() * 1000 ?>,
             "end": <?= $option->getEndTime()->getTimestamp() * 1000 ?>,
         },
-        <?php endforeach ?>
+        <?php endif endforeach ?>
     ];
     $.getJSON('https://www.googleapis.com/calendar/v3/calendars/<?= $calendarKey ?>@group.calendar.google.com/events?key=<?= $APIKey ?>&maxResults=2500&showDeleted=false&timeMin=' + timeMinString, function(data) {
         $.each( data.items, function( key, item ) {
