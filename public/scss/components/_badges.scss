@@ -32,3 +32,11 @@ Styleguide: badges
 .list-group-item > .badge {
     float: none;
 }
+.new-label {
+    border-radius: 3px;
+    display: inline-block;
+    padding: 0.1em 0.3em;
+    background-color: #d40026;
+    color: #FFF;
+    margin-right: 0.5em;
+}
