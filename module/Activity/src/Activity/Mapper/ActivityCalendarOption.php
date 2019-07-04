@@ -77,6 +77,7 @@ class ActivityCalendarOption
      *
      * @param bool $withDeleted whether to include deleted results
      * @return array
+     * @throws \Exception
      */
     public function getUpcomingOptions($withDeleted = false)
     {
@@ -87,7 +88,8 @@ class ActivityCalendarOption
             ->orderBy('a.beginTime', 'ASC');
 
         if (!$withDeleted) {
-            $qb->andWhere("a.status != 'deleted'");
+            $qb->andWhere("a.modifiedBy IS NULL")
+                ->orWhere("a.status = 'approved'");
         }
         $qb->setParameter('now', new DateTime());
 
@@ -110,7 +112,8 @@ class ActivityCalendarOption
             ->orderBy('a.beginTime', 'ASC');
 
         if (!$withDeleted) {
-            $qb->andWhere("a.status != 'deleted'");
+            $qb->andWhere("a.modifiedBy IS NULL")
+                ->orWhere("a.status = 'approved'");
         }
         $qb->setParameter('before', $before);
 

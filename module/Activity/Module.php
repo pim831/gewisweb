@@ -8,7 +8,7 @@ use Activity\Mapper\ActivityCalendarOption;
 use Activity\Mapper\ActivityFieldValue;
 use Activity\Mapper\ActivityOption;
 use Activity\Mapper\ActivityOptionCreationPeriod;
-use Activity\Mapper\ActivityOptionCreationProposal;
+use Activity\Mapper\ActivityOptionProposal;
 use Activity\Mapper\MaxActivities;
 use Activity\Mapper\Proposal;
 use Activity\Mapper\Signup;
@@ -151,7 +151,7 @@ class Module
                     );
                 },
                 'activity_mapper_option_proposal' => function ($sm) {
-                    return new ActivityOptionCreationProposal(
+                    return new ActivityOptionProposal(
                         $sm->get('activity_doctrine_em')
                     );
                 },
@@ -193,7 +193,7 @@ class Module
                     $acl->allow('sosuser', 'activitySignup', ['signup', 'signoff', 'checkUserSignedUp']);
 
                     $acl->allow('user', 'activity_calendar_proposal', ['create', 'delete_own']);
-                    $acl->allow('admin', 'activity_calendar_proposal', ['create_always']);
+                    $acl->allow('admin', 'activity_calendar_proposal', ['create_always', 'delete_all', 'approve']);
                     return $acl;
                 },
             ]

@@ -20,7 +20,8 @@ class ActivityCalendarController extends AbstractActionController
             'APIKey' => $config['google_api_key'],
             'calendarKey' => $config['google_calendar_key'],
             'success' => $this->getRequest()->getQuery('success', false),
-            'canCreate' => $service->canCreateProposal()
+            'canCreate' => $service->canCreateProposal(),
+            'canApprove' => $service->canApproveOption()
         ]);
     }
 
@@ -59,7 +60,6 @@ class ActivityCalendarController extends AbstractActionController
         $service = $this->getActivityCalendarService();
 
         $form = $service->getCreateProposalForm();
-        $success = null;
 
         if ($this->getRequest()->isPost()) {
             $postData = $this->getRequest()->getPost();
@@ -77,7 +77,6 @@ class ActivityCalendarController extends AbstractActionController
         return new ViewModel([
             'period' => $period,
             'form' => $form,
-            'success' => $success,
         ]);
     }
 
