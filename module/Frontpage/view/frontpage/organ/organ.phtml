@@ -128,12 +128,12 @@ function getOrganDescription($organInformation, $lang)
                     </li>
                 <?php endforeach ?>
             </ul>
-            <?=
-            sprintf(
-                $this->translate('More information about %s can be found %shere%s.'), $this->getAbbr(),
-                '<a href="' . $this->url('organ/show', ['organ' => $organ->getId()]) . '">', '</a>'
-            );
-            ?>
+                <?=
+                sprintf(
+                    $this->translate('More information about %s can be found %shere%s.'), $organ->getAbbr(),
+                    '<a href="' . $this->url('organ/show', ['organ' => $organ->getId()]) . '">', '</a>'
+                );
+                ?>
             <?php else: ?>
                 <?= $this->translate('Login to view more information') ?>
             <?php endif; ?>
