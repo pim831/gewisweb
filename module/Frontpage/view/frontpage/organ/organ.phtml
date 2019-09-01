@@ -89,6 +89,14 @@ function getOrganDescription($organInformation, $lang)
                         </td>
                     </tr>
                 <?php endif; ?>
+                <tr>
+                    <td><span class="glyphicon glyphicon-link"></span>&nbsp;<?= $this->translate('Details') ?></td>
+                    <td>
+                        <a href="<?= $this->url('organ/show', ['organ' => $organ->getId()]) ?>">
+                            detailPagina
+                        </a>
+                    </td>
+                </tr>
             </table>
             <div class="panel panel-default agenda">
                 <div class="panel-heading">
@@ -128,10 +136,6 @@ function getOrganDescription($organInformation, $lang)
                     </li>
                 <?php endforeach ?>
             </ul>
-            More information about <?= $this->getAbbr() ?> can be found
-                <a href="<?= $this->url('organ/show', ['organ' => $organ->getId()]) ?>">
-                    here
-                </a>.
             <?php else: ?>
                 <?= $this->translate('Login to view more information') ?>
             <?php endif; ?>
