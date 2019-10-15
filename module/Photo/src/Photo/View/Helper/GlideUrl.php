@@ -15,15 +15,13 @@ use League\Glide\Urls\UrlBuilderFactory;
 class GlideUrl extends AbstractHelper
 {
 
-    protected $config;
+    protected $urlBuilder;
 
     /**
      * @return \Photo\View\Helper\GlideUrl
      */
     public function __invoke()
     {
-        if ($this->config === null)
-            throw new \Exception('No config provided to GlideUrl helper');
         return $this;
     }
 
@@ -35,17 +33,16 @@ class GlideUrl extends AbstractHelper
      */
     public function getUrl($imagePath, $params)
     {
-        $urlBuilder = UrlBuilderFactory::create($this->config['glide']['base_url'], $this->config['glide']['signing_key']);
-        return $urlBuilder->getUrl($imagePath, $params);
+        return $this->urlBuilder->getUrl($imagePath, $params);
     }
 
     /**
-     * Set the service locator
+     * Set the url builder
      *
-     * @param \Zend\ServiceManager\ServiceLocatorInterface
+     * @param \League\Glide\Urls\UrlBuilder $urlBuilder
      */
-    public function setConfig($config)
+    public function setUrlBuilder($urlBuilder)
     {
-        $this->config = $config;
+        $this->urlBuilder = $urlBuilder;
     }
 }

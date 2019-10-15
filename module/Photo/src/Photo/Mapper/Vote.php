@@ -31,7 +31,6 @@ class Vote
     /**
      * Get the amount of votes of all photos that have been visited
      * in the specified time range
-     * 
      * @param \DateTime $startDate
      * @param \DateTime $enddate
      * @return array of array of string
@@ -87,5 +86,4 @@ class Vote
     {
         return $this->em->getRepository('Photo\Model\Vote');
     }
-
 }
