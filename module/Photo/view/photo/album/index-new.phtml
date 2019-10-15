@@ -128,23 +128,21 @@ $this->scriptUrl()->requireUrl('member/search')
             $path = $this->url('photo/album', ['album_id' => $album->getId()]);
         }
         ?>
-        <?php if ($album->getAlbumCount() > 0): ?>
-            <div class="row">
-                <?php foreach ($album->getChildren() as $item): ?>
-                    <div class="col-lg-2 col-md-3 col-xs-6 thumb">
+
+        <div class="photo-grid">
+            <div class="grid-sizer"></div>
+            <div class="gutter-sizer"></div>
+            <?php foreach ($album->getChildren() as $item): ?>
+                    <!-- TODO: fix this -->
+                   <!-- <div class="photo-grid-item photo-grid-item-album">
                         <a class="thumbnail" href="<?= $this->url('photo/album', ['album_id' => $item->getId()]); ?>">
                             <img src="<?= $this->fileUrl($item->getCoverPath()); ?>">
                             <div class="caption">
                                 <?= $this->escapeHtml($item->getName()); ?>
                             </div>
                         </a>
-                    </div>
-                <?php endforeach ?>
-            </div>
-        <?php endif; ?>
-        <div class="photo-grid">
-            <div class="grid-sizer"></div>
-            <div class="gutter-sizer"></div>
+                    </div> -->
+            <?php endforeach ?>
             <?php foreach ($album->getPhotos() as $item): ?>
                 <?php
                     $ar = $item->getAspectRatio();
