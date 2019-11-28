@@ -1,0 +1,194 @@
+<?php
+    echo $this->headScript()
+    ->prependFile($this->basePath() . '/js/merchandise.js');
+echo $this->headScript()
+    ->prependFile($this->basePath() . '/js/etc.js');
+$this->headTitle($this->translate('Merchandise'));
+?>
+
+<div class="container">
+    <section class="section">
+
+        <div class="row">
+            <div class="col-md-12">
+                <h1><?= $this->translate("Merchandise") ?></h1>
+            </div>
+        </div>
+
+        <div class="row">
+
+            <!-- Column used to show all merchandise items        -->
+            <div class="col-sm-12 merchandise">
+
+                <div class="row">
+                    <div class="col-lg-3 col-md-6 col-sm-12 card-holder">
+                        <div class="card">
+                            <img class="card-img-top img-responsive"
+                                 src="https://cdn.webshopapp.com/shops/142036/files/215036549/600x600x2/odlo-active-f-dry-light-heren-t-shirt.jpg"
+                                 alt="GEWIS t-shirt">
+                            <div class="card-body">
+                                <hr>
+                                <h2 class="card-title">Wit sportshirt</h2>
+                                <p class="text-muted">
+                                    5 in voorraad
+                                </p>
+                                <p class="card-text">
+                                    Een simpel t-shirt voor simpele mensen door simpele mensen.
+                                </p>
+                                <button class="btn btn-danger add-to-basket pull-right">
+                                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                                </button>
+                                <button class="btn btn-primary remove-from-basket pull-right hidden">
+                                    <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 col-sm-12 card-holder">
+                        <div class="card">
+                            <img class="card-img-top img-responsive"
+                                 src="https://www.sans-online.nl/imgs/10110799_1/1200/1200/t-shirt-met-print-1008640xx10-tom-tailor-t-shirt-21869.jpg"
+                                 alt="GEWIS t-shirt">
+                            <div class="card-body">
+                                <hr>
+                                <h2 class="card-title">Blauw casual t-shirt</h2>
+                                <p class="text-muted">
+                                    10 in voorraad
+                                </p>
+                                <p class="card-text">
+                                    Wanneer je er even helemaal doorheen zit, kijk je naar beneden en zie je de rustige
+                                    blauwe kleur van je shirt.
+                                </p>
+                                <button class="btn btn-danger add-to-basket pull-right">
+                                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                                </button>
+                                <button class="btn btn-primary remove-from-basket pull-right hidden">
+                                    <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 col-sm-12 card-holder">
+                        <div class="card">
+                            <img class="card-img-top img-responsive"
+                                 src="https://cdn.webshopapp.com/shops/142036/files/218678795/600x600x2/odlo-active-f-dry-light-heren-t-shirt.jpg"
+                                 alt="GEWIS t-shirt">
+                            <div class="card-body">
+                                <hr>
+                                <h2 class="card-title">Aqua sportshirt</h2>
+                                <p class="text-muted">
+                                    20 in voorraad
+                                </p>
+                                <p class="card-text">
+                                    Als je gaat sporten, moet je er natuurlijk wel goed gekleed uitzien. Dit is het
+                                    perfecte shirt om die vrouwen (of mannen) naar je om te laten kijken!
+                                </p>
+                                <button class="btn btn-danger add-to-basket pull-right">
+                                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                                </button>
+                                <button class="btn btn-primary remove-from-basket pull-right hidden">
+                                    <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 col-sm-12 card-holder">
+                        <div class="card">
+                            <img class="card-img-top img-responsive"
+                                 src="https://cdn.webshopapp.com/shops/142036/files/215036543/600x600x2/odlo-active-f-dry-light-heren-t-shirt.jpg"
+                                 alt="GEWIS t-shirt">
+                            <div class="card-body">
+                                <hr>
+                                <h2 class="card-title">Zwart sportshirt</h2>
+                                <p class="text-muted">
+                                    15 in voorraad
+                                </p>
+                                <p class="card-text">
+                                    Sommige mensen willen juist niet opvallen tijdens het sporten. Een zwart shirt kan
+                                    daarbij goed helpen.
+                                </p>
+                                <button class="btn btn-danger add-to-basket pull-right">
+                                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                                </button>
+                                <button class="btn btn-primary remove-from-basket pull-right hidden">
+                                    <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="row">
+            <!-- Column used for showing bsaket -->
+            <div class="col-xs-6 basket">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4>Bestelling</h4>
+                    </div>
+                    <div class="panel-body">
+
+
+
+                        <ul class="list-group list-group-flush">
+
+                            <li class="list-group-item">
+                                <form class="form-inline basket-item">
+                                    <div class="form-group">
+                                        <select id="memoryType"  class="form-control">
+                                            <option value="1" selected="selected">1x</option>
+                                            <option value="2">2x</option>
+                                            <option value="3">3x</option>
+                                            <option value="4">4x</option>
+                                            <option value="5">5x</option>
+                                        </select>
+                                        <label class="control-label"> </label>
+                                        <label class="control-label"><h2 class="basket-item-description">Wit sportshirt</h2></label>
+                                    </div>
+                                </form>
+                            </li>
+
+                            <li class="list-group-item">
+                                <form class="form-inline basket-item">
+                                    <div class="form-group">
+                                        <select id="memoryType"  class="form-control">
+                                            <option value="1" selected="selected">1x</option>
+                                            <option value="2">2x</option>
+                                            <option value="3">3x</option>
+                                            <option value="4">4x</option>
+                                            <option value="5">5x</option>
+                                        </select>
+                                        <label class="control-label"> </label>
+                                        <label class="control-label"><h2 class="basket-item-description">Zwart sportshirt</h2></label>
+                                    </div>
+                                </form>
+                            </li>
+
+                        </ul>
+
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Opmerkingen voor bestelling</span>
+                            </div>
+                        </div>
+                        <textarea class="form-control comments-for-order"
+                                  aria-label="Opmerkingen voor bestelling"></textarea>
+                    </div>
+                    <div class="panel-footer panel-footer--links">
+                        <a href="" class="panel-footer__link--primary">Bestellen</a>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+    </section>
+
+</div>
