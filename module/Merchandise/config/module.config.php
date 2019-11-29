@@ -10,7 +10,7 @@ return [
             'list' => [
                 'type' => 'Literal',
                 'options' => [
-                    'route' => '/',
+                    'route' => '/merchandise',
                     'defaults' => [
                         'controller' => 'Merchandise\Controller\List',
                         'action' => 'index',
