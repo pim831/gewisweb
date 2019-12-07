@@ -1,5 +1,5 @@
 <?php
-    echo $this->headScript()
+    $this->headScript()
     ->prependFile($this->basePath() . '/js/merchandise.js');
 //echo $this->headScript()
 //    ->prependFile($this->basePath() . '/js/etc.js');
@@ -45,30 +45,30 @@ $this->headTitle($this->translate('Merchandise'));
                         </div>
                     </div>
 
-<!--                    <div class="col-lg-3 col-md-6 col-sm-12 card-holder">-->
-<!--                        <div class="card">-->
-<!--                            <img class="card-img-top img-responsive"-->
-<!--                                 src="https://www.sans-online.nl/imgs/10110799_1/1200/1200/t-shirt-met-print-1008640xx10-tom-tailor-t-shirt-21869.jpg"-->
-<!--                                 alt="GEWIS t-shirt">-->
-<!--                            <div class="card-body">-->
-<!--                                <hr>-->
-<!--                                <h2 class="card-title">Blauw casual t-shirt</h2>-->
-<!--                                <p class="text-muted">-->
-<!--                                    10 in voorraad-->
-<!--                                </p>-->
-<!--                                <p class="card-text">-->
-<!--                                    Wanneer je er even helemaal doorheen zit, kijk je naar beneden en zie je de rustige-->
-<!--                                    blauwe kleur van je shirt.-->
-<!--                                </p>-->
-<!--                                <button class="btn btn-danger add-to-basket pull-right">-->
-<!--                                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>-->
-<!--                                </button>-->
-<!--                                <button class="btn btn-primary remove-from-basket pull-right hidden">-->
-<!--                                    <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>-->
-<!--                                </button>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
+                    <div class="col-lg-3 col-md-6 col-sm-12 card-holder">
+                        <div class="card">
+                            <img class="card-img-top img-responsive"
+                                 src="https://www.sans-online.nl/imgs/10110799_1/1200/1200/t-shirt-met-print-1008640xx10-tom-tailor-t-shirt-21869.jpg"
+                                 alt="GEWIS t-shirt">
+                            <div class="card-body">
+                                <hr>
+                                <h2 class="card-title" id="tshirt-2">Blauw casual t-shirt</h2>
+                                <p class="text-muted">
+                                    10 in voorraad
+                                </p>
+                                <p class="card-text">
+                                    Wanneer je er even helemaal doorheen zit, kijk je naar beneden en zie je de rustige
+                                    blauwe kleur van je shirt.
+                                </p>
+                                <button class="btn btn-danger add-to-basket pull-right">
+                                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                                </button>
+                                <button class="btn btn-primary remove-from-basket pull-right hidden">
+                                    <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
 <!---->
 <!--                    <div class="col-lg-3 col-md-6 col-sm-12 card-holder">-->
 <!--                        <div class="card">-->
@@ -126,8 +126,8 @@ $this->headTitle($this->translate('Merchandise'));
         </div>
 
         <div class="row">
-            <!-- Column used for showing bsaket -->
-            <div class="col-xs-6 basket">
+            <!-- Column used for showing basket -->
+            <div class="col-xs-12 basket">
                 <div class="panel panel -default">
                     <div class="panel-heading">
                         <h4>Bestelling</h4>

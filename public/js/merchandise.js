@@ -1,15 +1,16 @@
 
 $(function() {
 
-    // Click on add
+    // User clicked to add an item to the basket
     $(".add-to-basket").on("click", function () {
 
         var sibling = $(this).siblings(".card-title");
-        var itemName = sibling.attr("id");
+        var itemId = sibling.attr("id");
+        var itemName = sibling.text();
 
-        console.log($(".basket-item:first"));
+        console.log("Adding " + itemName + " (ID " + itemId + " ) to your basket");
 
-        var newBasketItem = $(" <li class=\"list-group-item basket-item hide\">\n" +
+        var newBasketItem = $(" <li class=\"list-group-item basket-item hide " + itemId + " \">\n" +
             "                                <form class=\"form-inline basket-item-form\">\n" +
             "                                    <div class=\"form-group\">\n" +
             "                                        <select class=\"form-control\">\n" +
@@ -28,16 +29,43 @@ $(function() {
             "                                        </select>\n" +
             "                                        <label class=\"control-label\"> </label>\n" +
             "                                        <label class=\"control-label\"> </label>\n" +
-            "                                        <label class=\"control-label\"><h2 class=\"basket-item-description\">Zwart sportshirt</h2></label>\n" +
+            "                                        <label class=\"control-label\"><h2 class=\"basket-item-description\">" + itemName + "</h2></label>\n" +
             "                                    </div>\n" +
             "                                </form>\n" +
             "                            </li>");
 
-        var test = newBasketItem.appendTo(".list-group");
 
-        test.removeClass("hide");
-        //console.log(newBasketItem);
+        if ($(".list-group").children("." + itemId).length !== 0) {
+            console.log("Not adding item, because it's already there!");
+            return;
+        }
 
+        var addedItem = newBasketItem.appendTo(".list-group");
+
+        addedItem.removeClass("hide");
+
+        // Now show remove icon.
+        $(this).addClass("hidden");
+        $(this).siblings(".remove-from-basket").removeClass("hidden");
+
+    });
+
+    // Remove item from basket is clicked
+    $(".remove-from-basket").on("click", function () {
+
+        // Remove the item from the basket and display the add icon again.
+        var sibling = $(this).siblings(".card-title");
+        var itemId = sibling.attr("id");
+        var itemName = sibling.text();
+
+        console.log("Removing " + itemName + " (ID " + itemId + " ) from your basket");
+
+        // Remove the item from the basket.
+        $(".list-group").children("." + itemId).remove();
+
+        // Now show add icon.
+        $(this).addClass("hidden");
+        $(this).siblings(".add-to-basket").removeClass("hidden");
     });
 
 });
