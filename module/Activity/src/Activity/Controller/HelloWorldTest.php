@@ -22,7 +22,7 @@ final class EmailTest extends TestCase
     {
         $this->assertEquals(
             'user@example.com',
-            Email::fromString('user@example.nl')
+            Email::fromString('user@example.com')
         );
     }
 }
