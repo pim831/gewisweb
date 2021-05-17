@@ -88,6 +88,7 @@ class Company
         $this->em->persist($newcompany);
 
         $companies = [$company, $newcompany];
+        //$companies = [$company];
 
         return $companies;
     }

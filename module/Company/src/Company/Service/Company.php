@@ -589,6 +589,8 @@ class Company extends AbstractACLService
             $companies = $this->insertCompany($data['languages']);
             $company = $companies[0];
             $company->exchangeArray($data);
+            $newcompany = $companies[1];
+            $newcompany->exchangeArray($data);
             foreach ($company->getTranslations() as $translation) {
                 $file = $files[$translation->getLanguage() . '_logo'];
 
@@ -620,7 +622,13 @@ class Company extends AbstractACLService
             );
         }
 
-        return $this->getCompanyMapper()->insert($languages);
+        $company = $this->getCompanyMapper()->insert($languages);
+
+//        $newcompany = new NewCompanyModel($company);
+//        $this->em->persist($newcompany);
+//        array_push($company, $newcompany);
+
+        return $company;
     }
 
     /**

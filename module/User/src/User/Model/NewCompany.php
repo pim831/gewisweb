@@ -63,7 +63,7 @@ class NewCompany
     public function __construct(Company $company = null)
     {
         if (null !== $company) {
-            //$this->contactEmail = $company->getContactEmail();
+            $this->contactEmail = $company->getContactEmail();
             $this->company = $company;
             $this->code = $this->generateCode();
         }
@@ -86,6 +86,30 @@ class NewCompany
         }
 
         return $ret;
+    }
+
+    /**
+     * @param string $contactEmail
+     */
+    public function setContactEmail($contactEmail)
+    {
+        $this->contactEmail = $contactEmail;
+    }
+
+    /**
+     * Updates the variable if the first argument is set, Otherwise, it will
+     * use the second argument.
+     *
+     * @param mixed $object
+     * @param mixed $default
+     */
+    private function updateIfSet($object, $default)
+    {
+        if (isset($object)) {
+            return $object;
+        }
+
+        return $default;
     }
 
     /**
@@ -136,5 +160,10 @@ class NewCompany
     public function getCompany()
     {
         return $this->company;
+    }
+
+    public function exchangeArray($data)
+    {
+        $this->setContactEmail($this->updateIfSet($data['contactEmail'],''));
     }
 }
