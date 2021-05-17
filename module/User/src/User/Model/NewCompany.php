@@ -52,6 +52,25 @@ class NewCompany
     protected $company;
 
     /**
+     * Generate an activation code for the user.
+     *
+     * @param int $length
+     *
+     * @return string
+     */
+    public function generateCode($length = 20)
+    {
+        $ret = '';
+        $alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+
+        for ($i = 0; $i < $length; $i++) {
+            $ret .= $alphabet[rand(0, strlen($alphabet) - 1)];
+        }
+
+        return $ret;
+    }
+
+    /**
      * Get the company id.
      *
      * @return int
@@ -59,6 +78,11 @@ class NewCompany
     public function getId()
     {
         return $this->id;
+    }
+
+    public function setCode($code)
+    {
+        $this->code = $code;
     }
 
     /**

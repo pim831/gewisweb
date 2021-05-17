@@ -89,6 +89,22 @@ class UserController extends AbstractActionController
     }
 
     /**
+     * User logout action.
+     */
+    public function companyLogoutAction()
+    {
+        $this->getCompanyService()->logout();
+
+        // used to get point user to current page on logout, only use
+//        if (isset($_SERVER['HTTP_REFERER'])) {
+//            return $this->redirect()->toUrl($_SERVER['HTTP_REFERER']);
+//        }
+
+        // default set to home
+        return $this->redirect()->toRoute('home');
+    }
+
+    /**
      * User register action.
      */
     public function registerAction()
@@ -140,6 +156,26 @@ class UserController extends AbstractActionController
 
         if ($request->isPost()) {
             $newUser = $userService->reset($request->getPost());
+            if (null !== $newUser) {
+                return new ViewModel([
+                    'reset' => true,
+                    'user' => $newUser
+                ]);
+            }
+        }
+
+        return new ViewModel([
+            'form' => $userService->getPasswordResetForm()
+        ]);
+    }
+
+    public function resetCompanyAction()
+    {
+        $userService = $this->getUserService();
+        $request = $this->getRequest();
+
+        if ($request->isPost()) {
+            $newUser = $userService->resetCompany($request->getPost());
             if (null !== $newUser) {
                 return new ViewModel([
                     'reset' => true,
@@ -222,23 +258,33 @@ class UserController extends AbstractActionController
 
     public function companyAction()
     {
-        $userService = $this->getUserService();
+        $companyService = $this->getCompanyService();
 
         if ($this->getRequest()->isPost()) {
             $data = $this->getRequest()->getPost();
             // try to login
-            $login = $userService->companyLogin($data);
+            $login = $companyService->companyLogin($data);
 
             if (!is_null($login)) {
-                // TODO: set here the url of the company landing page instead of home
-                return $this->redirect()->toRoute('home');
+                return $this->redirect()->toRoute('companyaccount/index');
             }
         }
 
 
         return new ViewModel([
-            'form' => $userService->getCompanyLoginForm()
+            'form' => $companyService->getCompanyLoginForm()
         ]);
+    }
+
+
+    /**
+     * Get a user service.
+     *
+     * @return \User\Service\Company
+     */
+    protected function getCompanyService()
+    {
+        return $this->getServiceLocator()->get('user_service_company');
     }
 
     /**
