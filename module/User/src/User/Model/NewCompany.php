@@ -56,14 +56,13 @@ class NewCompany
     /**
      * Constructor.
      *
-     * We can populate most values from a member model.
+     * We can populate most values from a company model.
      *
      * @param Company $company
      */
     public function __construct(Company $company = null)
     {
         if (null !== $company) {
-            //$this->contactEmail = $company->getContactEmail();
             $this->company = $company;
             $this->code = $this->generateCode();
         }
