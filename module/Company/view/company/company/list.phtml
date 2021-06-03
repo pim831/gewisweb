@@ -112,6 +112,7 @@ $this->headTitle($this->translate('Companies'));
                                         </ul>
                                         <span class="label label-default job-sectors"
                                               data-sectors="<?= $company->getSector(); ?>" data-toggle="tooltip"></span>
+                                        <p class="card-subtitle text-muted"><?= $company->getName() ?></p>
                                     </div>
                                 <?php endforeach; ?>
                             </div>
@@ -207,6 +208,7 @@ $this->headTitle($this->translate('Companies'));
             },
             filterByText: function (query) {
                 cards.forEach(function (card) {
+                    console.log(card.text);
                     card.isMatchOn['search'] = (card.text.indexOf(query.toLowerCase()) > -1);
                 });
 
@@ -279,8 +281,6 @@ $this->headTitle($this->translate('Companies'));
     // Filter on sectors
     $("#sector-filter").change(function () {
         var sector = $(this).val();
-
-        console.log(sector);
 
         // When "all" is selected clear all filters.
         if (sector == "all") {
